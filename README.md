@@ -53,9 +53,9 @@ Giải thích về cấu trúc thư mục trên:
 - `index.php` : file mà trang truy cập đầu tiên, nhận các cái param.
 <br>File này sẽ là file nhận mọi yêu cầu truy vấn lên server. Bởi vậy, mọi đường dẫn truy cập đều phải có dạng `/?param=value` hoặc `/index.php?param=value`.
 
-## File để tạo database lưu trong views/_assets/sqlDB/portfolio.txt
-
 Thứ tự file được tác động:
 `index.php` nhận `controller` và `action` xong sẽ chuyển sang class `Controller` tương ứng, rồi từ `Controller` sẽ gọi lên `action` được truyền tới file tương ứng và nhét file đấy vào `application.php`.
 
 VD: đường dẫn là `index.php?controller=pages&action=home` thì sẽ nhận `controller` là `pages` và `action` là `home`. sau đó chuyển sang class tương ứng được lưu trong array `controllers`. và gọi cái `action` của nó lên là `home`. action `home` sẽ gọi cái file `views/pages/home.php` và được gắn vào `content` ở trong file `application.php`.
+
+## File để tạo database lưu trong views/_assets/sqlDB/portfolio.txt
