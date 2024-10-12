@@ -1,0 +1,62 @@
+CREATE DATABASE portfolio;
+USE portfolio;
+
+CREATE TABLE users (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    mail VARCHAR(255) NOT NULL,
+    phone_number VARCHAR(255) NOT NULL );
+    
+CREATE TABLE user_projects (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(225) NOT NULL,
+    description TEXT NOT NULL,
+    url TEXT NOT NULL,
+    user_id INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+    ON UPDATE CASCADE ON DELETE CASCADE );
+   
+CREATE TABLE user_social_accounts (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    url TEXT NOT NULL,
+    name VARCHAR(255) NOT NULL,
+	user_id INT NOT NULL,
+	FOREIGN KEY (user_id) REFERENCES users(id)
+    ON UPDATE CASCADE ON DELETE CASCADE );
+    
+CREATE TABLE user_work_histories (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    position VARCHAR(255) NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    year YEAR NOT NULL,
+    user_id INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+    ON UPDATE CASCADE ON DELETE CASCADE );
+
+CREATE TABLE contacts (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    sent_time INT NOT NULL );
+    
+INSERT INTO users (username, password, address, mail, phone_number) 
+VALUES ('user1', 'user1', 'Park Link', 'user1@example.com', '0987654321');
+
+INSERT INTO user_projects (name, description, url, user_id) 
+VALUES ('Portfolio Website', 'A personal website to showcase projects', 'https://portfolio.com', 1),
+       ('E-commerce Platform', 'A platform for buying and selling goods online', 'https://ecommerce.com', 1);
+
+INSERT INTO user_social_accounts (url, name, user_id) 
+VALUES ('https://github.com/johndoe', 'GitHub', 1),
+       ('https://linkedin.com/in/janesmith', 'LinkedIn', 1);
+
+INSERT INTO user_work_histories (position, title, year, user_id) 
+VALUES ('Software Engineer', 'Lead Developer', 2022, 1),
+       ('Project Manager', 'Senior PM', 2023, 1);
+
+INSERT INTO contacts (email, title, content, sent_time) 
+VALUES ('contact1@example.com', 'Project Inquiry', 'I would like to discuss a project with you.', UNIX_TIMESTAMP()),
+       ('contact2@example.com', 'Job Offer', 'We have a job offer for you.', UNIX_TIMESTAMP());
